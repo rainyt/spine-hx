@@ -74,7 +74,7 @@ class MeshAttachment extends VertexAttachment {
         var uvs:FloatArray = this.uvs;
         var n:Int = uvs.length;
         var u:Float = 0; var v:Float = 0; var width:Float = 0; var height:Float = 0;
-        if (#if (haxe_ver >= 4.0) Std.isOfType #else Std.is #end(region, AtlasRegion)) {
+        if (Std.is(region, AtlasRegion)) {
             u = region.getU();
             v = region.getV();
             var region:AtlasRegion = fastCast(this.region, AtlasRegion);
