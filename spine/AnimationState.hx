@@ -260,7 +260,7 @@ class AnimationState {
     private function applyMixingFrom(to:TrackEntry, skeleton:Skeleton, blend:MixBlend):Float {
         var from:TrackEntry = to.mixingFrom;
         __maxApplyMixingFromTimes ++;
-        if(__maxApplyMixingFromTimes > 10) {
+        if(__maxApplyMixingFromTimes > 100) {
             // TODO 可能需要上报一下，做一下记录
         }
         else if (from.mixingFrom != null) applyMixingFrom(from, skeleton, blend);
