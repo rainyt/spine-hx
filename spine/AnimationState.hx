@@ -214,8 +214,10 @@ class AnimationState {
 
             // Apply mixing from entries first.
             var mix:Float = current.alpha;
-            if (current.mixingFrom != null)
+            if (current.mixingFrom != null){
+                __maxApplyMixingFromTimes = 0;
                 mix *= applyMixingFrom(current, skeleton, blend);
+            }
             else if (current.trackTime >= current.trackEnd && current.next == null) //
                 mix = 0; // Set to setup pose the last time the entry will be applied.
 
@@ -253,9 +255,15 @@ class AnimationState {
         return applied;
     }
 
+    private var __maxApplyMixingFromTimes = 0;
+
     private function applyMixingFrom(to:TrackEntry, skeleton:Skeleton, blend:MixBlend):Float {
         var from:TrackEntry = to.mixingFrom;
-        if (from.mixingFrom != null) applyMixingFrom(from, skeleton, blend);
+        __maxApplyMixingFromTimes ++;
+        if(__maxApplyMixingFromTimes > 10) {
+            // TODO 可能需要上报一下，做一下记录
+        }
+        else if (from.mixingFrom != null) applyMixingFrom(from, skeleton, blend);
 
         var mix:Float = 0;
         if (to.mixDuration == 0) { // Single frame mix to undo mixingFrom changes.
