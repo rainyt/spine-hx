@@ -262,7 +262,7 @@ class AnimationState {
         __maxApplyMixingFromTimes ++;
         if(__maxApplyMixingFromTimes > 100) {
             // TODO 可能需要上报一下，做一下记录
-            return;
+            return 0;
         }
         else if (from.mixingFrom != null) applyMixingFrom(from, skeleton, blend);
 
